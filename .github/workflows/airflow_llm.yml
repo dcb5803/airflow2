@@ -1,0 +1,20 @@
+# .github/workflows/airflow_llm.yml
+name: Airflow LLM DAG Test
+
+on: [push]
+
+jobs:
+  test-dag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          pip install apache-airflow pandas transformers
+      - name: Run DAG locally
+        run: |
+          python airflow_llm_dag.py
